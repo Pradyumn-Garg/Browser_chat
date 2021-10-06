@@ -9,6 +9,9 @@ app.use(
 )
 io.on('connection', socket => {
   console.log('Some client connected')
+  socket.on('chat', message => {
+    io.emit('chat', {message, id: socket.id})
+  })
 })
 const port = process.env.PORT || 3000
 server.listen(port, ()=> {
